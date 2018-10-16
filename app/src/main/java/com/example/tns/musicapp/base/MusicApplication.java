@@ -1,4 +1,4 @@
-package com.example.tns.musicapp.Base;
+package com.example.tns.musicapp.base;
 
 import android.app.Application;
 import android.util.Log;
