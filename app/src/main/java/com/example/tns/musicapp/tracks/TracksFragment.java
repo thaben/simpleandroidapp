@@ -16,9 +16,10 @@ import java.util.ArrayList;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class TracksFragment extends Fragment {
+public class TracksFragment extends Fragment implements TracksView {
 
     RecyclerView mTracksRv;
+    TracksPresenter tracksPresenter;
 
 
     public TracksFragment() {
@@ -35,19 +36,19 @@ public class TracksFragment extends Fragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         mTracksRv.setLayoutManager(layoutManager);
 
-        ArrayList<Track> tracks = new ArrayList<>();
-        addMockTracks(tracks);
+//        ArrayList<Track> tracks = new ArrayList<>(); This was MVC now converting for MVP - useless now
+//        addMockTracks(tracks);
 
-        TracksRvAdapter tracksRvAdapter = new TracksRvAdapter(tracks);
-        mTracksRv.setAdapter(tracksRvAdapter);
+        tracksPresenter = new TracksPresenterImp(this);
+        tracksPresenter.getTracks();
         return v;
     }
 
-    private void addMockTracks(ArrayList<Track> tracks) {
-        for (int i = 1; i < 100; i++) {
-            Track track = new Track("Track Name " + i, "Track Artist " + i, "TheCategory " + i);
-            tracks.add(track);
-        }
-    }
 
+
+    @Override
+    public void showTracks(ArrayList<Track> tracks) {
+        TracksRvAdapter tracksRvAdapter = new TracksRvAdapter(tracks);
+        mTracksRv.setAdapter(tracksRvAdapter);
+    }
 }

@@ -8,7 +8,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
 import com.example.tns.musicapp.R;
 
@@ -17,10 +16,11 @@ import java.util.ArrayList;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class PlaylistsFragment extends Fragment {
+public class PlaylistsFragment extends Fragment implements PlaylistView {
 
 
     RecyclerView playlistsRv;
+    PlaylistsPresenter playlistPresenter;
 
     public PlaylistsFragment() {
         // Required empty public constructor
@@ -37,51 +37,22 @@ public class PlaylistsFragment extends Fragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         playlistsRv.setLayoutManager(layoutManager);
 
-        ArrayList<Playlist> playlists = new ArrayList<>();
-        insertMockPlaylists(playlists);
+//        ArrayList<Playlist> playlists = new ArrayList<>(); this was for MVC now we use presenter
+//        insertMockPlaylists(playlists); this was for MVC now we use presenter
 
-        PlaylistsRvAdapter playlistsRvAdapter = new PlaylistsRvAdapter(playlists);
-        playlistsRv.setAdapter(playlistsRvAdapter);
+        playlistPresenter = new PlaylistsPresenterImp(this);
+        playlistPresenter.getPlaylists();
 
         return v;
     }
 
 
-    private void insertMockPlaylists(ArrayList<Playlist> playlists) {
-        playlists.add(new Playlist("1", "Post-rock", 11));
-        playlists.add(new Playlist("2", "Rock", 14));
-        playlists.add(new Playlist("3", "Pop", 9));
-        playlists.add(new Playlist("4", "Metal", 8));
-        playlists.add(new Playlist("1", "Nisiotika", 11));
-        playlists.add(new Playlist("2", "Rock", 14));
-        playlists.add(new Playlist("3", "Pop", 9));
-        playlists.add(new Playlist("4", "Country", 8));
-        playlists.add(new Playlist("1", "Country", 11));
-        playlists.add(new Playlist("2", "Rock", 14));
-        playlists.add(new Playlist("3", "Pop", 9));
-        playlists.add(new Playlist("4", "Metal", 8));
-        playlists.add(new Playlist("1", "Country", 11));
-        playlists.add(new Playlist("2", "Rock", 14));
-        playlists.add(new Playlist("3", "Pop", 9));
-        playlists.add(new Playlist("4", "Metal", 8));
-        playlists.add(new Playlist("1", "Country", 11));
-        playlists.add(new Playlist("2", "Rock", 14));
-        playlists.add(new Playlist("3", "Pop", 9));
-        playlists.add(new Playlist("4", "Metal", 8));
-        playlists.add(new Playlist("1", "Country", 11));
-        playlists.add(new Playlist("2", "Rock", 14));
-        playlists.add(new Playlist("3", "Pop", 9));
-        playlists.add(new Playlist("4", "Metal", 8));
-        playlists.add(new Playlist("1", "Country", 11));
-        playlists.add(new Playlist("2", "Rock", 14));
-        playlists.add(new Playlist("3", "Pop", 9));
-        playlists.add(new Playlist("4", "Metal", 8));
-        playlists.add(new Playlist("1", "Country", 11));
-        playlists.add(new Playlist("2", "Rock", 14));
-        playlists.add(new Playlist("3", "Pop", 9));
-        playlists.add(new Playlist("4", "Metal", 8));
+
+
+    @Override
+    public void showPlaylists(ArrayList<Playlist> playlists) {
+        PlaylistsRvAdapter playlistsRvAdapter = new PlaylistsRvAdapter(playlists);
+        playlistsRv.setAdapter(playlistsRvAdapter);
+
     }
-
-
-
 }
