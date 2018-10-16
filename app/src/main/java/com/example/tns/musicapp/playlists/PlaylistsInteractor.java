@@ -6,6 +6,8 @@ public interface PlaylistsInteractor {
 
     void getPlaylists(OnPlaylistsFinishListener listener);
 
+    void getFilteredPlaylists(OnPlaylistsFinishListener listener,String filterString);
+
         interface OnPlaylistsFinishListener {
 
             void onSuccess(ArrayList<Playlist> playlists);

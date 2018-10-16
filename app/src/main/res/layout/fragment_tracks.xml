@@ -6,6 +6,20 @@
     android:orientation="vertical"
     tools:context=".tracks.TracksFragment">
 
+
+    <EditText
+        android:id="@+id/filter_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp" />
+
+    <Button
+        android:id="@+id/filter_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="@string/filter_button_text" />
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/tracks_rv"
         android:layout_width="match_parent"

@@ -14,7 +14,13 @@ public class TracksPresenterImp implements TracksPresenter,TracksInteractor.OnTr
 
     @Override
     public void getTracks() {
-       tracksInteractor.getTracks(this);
+
+        tracksInteractor.getTracks(this);
+    }
+
+    @Override
+    public void getFilteredTracks(String filter) {
+        tracksInteractor.getFilteredTracks(this,filter);
     }
 
 

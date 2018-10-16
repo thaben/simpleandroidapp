@@ -8,6 +8,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.tns.musicapp.R;
@@ -21,6 +23,11 @@ public class TracksFragment extends Fragment implements TracksView {
 
     RecyclerView mTracksRv;
     TracksPresenter tracksPresenter;
+
+    //filter
+    EditText mFilterEditText;
+    Button mFilterButton;
+
 
 
     public TracksFragment() {
@@ -39,6 +46,19 @@ public class TracksFragment extends Fragment implements TracksView {
 
 //        ArrayList<Track> tracks = new ArrayList<>(); This was MVC now converting for MVP - useless now
 //        addMockTracks(tracks);
+
+
+
+        //filter
+        mFilterEditText = v.findViewById(R.id.filter_edit_text);
+        mFilterButton = v.findViewById(R.id.filter_button);
+        mFilterButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String filterText = mFilterEditText.getText().toString();
+                tracksPresenter.getFilteredTracks(filterText);
+            }
+        });
 
         tracksPresenter = new TracksPresenterImp(this);
         tracksPresenter.getTracks();

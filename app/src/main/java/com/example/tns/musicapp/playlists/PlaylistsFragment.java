@@ -9,6 +9,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.tns.musicapp.R;
@@ -23,6 +25,9 @@ public class PlaylistsFragment extends Fragment implements PlaylistView {
 
     RecyclerView playlistsRv;
     PlaylistsPresenter playlistPresenter;
+
+    EditText mFilterEditText;
+    Button mFilterButton;
 
     public PlaylistsFragment() {
         // Required empty public constructor
@@ -43,6 +48,22 @@ public class PlaylistsFragment extends Fragment implements PlaylistView {
 //        insertMockPlaylists(playlists); this was for MVC now we use presenter
 
         playlistPresenter = new PlaylistsPresenterImp(this);
+
+        //filter
+        mFilterEditText = v.findViewById(R.id.filter_edit_text);
+        mFilterButton = v.findViewById(R.id.filter_button);
+        mFilterButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String filterText = mFilterEditText.getText().toString();
+                playlistPresenter.getFilteredPlaylists(filterText);
+            }
+        });
+
+        //end of filter
+
+
+
         playlistPresenter.getPlaylists();
 
         return v;

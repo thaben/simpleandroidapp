@@ -3,5 +3,7 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="filter_button_text">Filter</string>
     <string name="title_activity_playlists">PlaylistsActivity</string>
 </resources>

@@ -17,6 +17,11 @@ public class PlaylistsPresenterImp implements PlaylistsPresenter, PlaylistsInter
        playlistsInteractor.getPlaylists(this);
     }
 
+    @Override
+    public void getFilteredPlaylists(String filter) {
+        playlistsInteractor.getFilteredPlaylists(this,filter);
+    }
+
 
     @Override
     public void onSuccess(ArrayList<Playlist> playlists) {
