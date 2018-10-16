@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.tns.musicapp.R;
@@ -14,10 +15,17 @@ import java.util.ArrayList;
 
 public class TracksRvAdapter extends RecyclerView.Adapter<TracksRvAdapter.TracksViewHolder> {
 
-    ArrayList<Track> tracks;
+    private ArrayList<Track> tracks;
+    private OnTrackClickListener listener;
 
     public TracksRvAdapter(ArrayList<Track> tracks) {
         this.tracks = tracks;
+    }
+
+    //onClickListener
+    public TracksRvAdapter(ArrayList<Track> tracks,OnTrackClickListener listener) {
+        this.tracks = tracks;
+        this.listener = listener;
     }
 
     //inner class to save memory for less memory usage-references
@@ -27,6 +35,7 @@ public class TracksRvAdapter extends RecyclerView.Adapter<TracksRvAdapter.Tracks
         TextView mTracksArtist;
         TextView mTracksCategory;
         ImageView mTracksLogo;
+        RelativeLayout mTrackItemRoot;
 
         public TracksViewHolder(View v) {
             super(v);
@@ -34,6 +43,7 @@ public class TracksRvAdapter extends RecyclerView.Adapter<TracksRvAdapter.Tracks
             mTracksArtist = v.findViewById(R.id.track_artist);
             mTracksCategory = v.findViewById(R.id.track_category);
             mTracksLogo = v.findViewById(R.id.track_logo);
+            mTrackItemRoot = v.findViewById(R.id.track_item_root) ;
         }
     }
 
@@ -49,10 +59,30 @@ public class TracksRvAdapter extends RecyclerView.Adapter<TracksRvAdapter.Tracks
 
     @Override
     public void onBindViewHolder(@NonNull TracksViewHolder viewHolder, int i) {
+
+        final int pos = i; //for onClickListener in order to find which item of list is clickd
+
+//for onClickListener
+        viewHolder.mTracksLogo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                listener.onTrackLogoClick(tracks.get(pos));
+            }
+
+        });
+//for onClickListener
+        viewHolder.mTrackItemRoot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                listener.onTrackClick(tracks.get(pos));
+            }
+        });
+
         viewHolder.mTracksName.setText(tracks.get(i).getTrackName());
         viewHolder.mTracksArtist.setText(tracks.get(i).getTrackArtist());
         viewHolder.mTracksCategory.setText(tracks.get(i).getTrackCategory());
         viewHolder.mTracksLogo.setImageResource(R.mipmap.ic_launcher);
+
     }
 
     @Override

@@ -5,9 +5,11 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.tns.musicapp.R;
 
@@ -48,11 +50,27 @@ public class PlaylistsFragment extends Fragment implements PlaylistView {
 
 
 
+//withOUT onClickListener - old
+//    @Override
+//    public void showPlaylists(ArrayList<Playlist> playlists) {
+//        PlaylistsRvAdapter playlistsRvAdapter = new PlaylistsRvAdapter(playlists);
+//        playlistsRv.setAdapter(playlistsRvAdapter);
+//
+//    }
 
+//with onClickListener
     @Override
     public void showPlaylists(ArrayList<Playlist> playlists) {
-        PlaylistsRvAdapter playlistsRvAdapter = new PlaylistsRvAdapter(playlists);
-        playlistsRv.setAdapter(playlistsRvAdapter);
+        PlaylistsRvAdapter playlistsRvAdapter = new PlaylistsRvAdapter(playlists, new OnPlaylistClickListener() {
+            @Override
+            public void onPlaylistClicked(Playlist playlist) {
+                Log.d("CS_TAG", "the playlist "
+                        + playlist.getName() + " got clicked");
 
+                Toast.makeText(getActivity(), "the playlist "
+                        + playlist.getName() + " got clicked", Toast.LENGTH_LONG).show();
+            }
+        });
+        playlistsRv.setAdapter(playlistsRvAdapter);
     }
 }

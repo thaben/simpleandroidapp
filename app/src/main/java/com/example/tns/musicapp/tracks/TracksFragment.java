@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.tns.musicapp.R;
 
@@ -45,10 +46,28 @@ public class TracksFragment extends Fragment implements TracksView {
     }
 
 
+// WITHOUT CLICK LISTENERS
+//    @Override
+//    public void showTracks(ArrayList<Track> tracks) {
+//        TracksRvAdapter tracksRvAdapter = new TracksRvAdapter(tracks);
+//        mTracksRv.setAdapter(tracksRvAdapter);
+//    }
 
+//WITH CLICK LISTENERS
     @Override
     public void showTracks(ArrayList<Track> tracks) {
-        TracksRvAdapter tracksRvAdapter = new TracksRvAdapter(tracks);
+        TracksRvAdapter tracksRvAdapter = new TracksRvAdapter(tracks, new OnTrackClickListener() {
+            @Override
+            public void onTrackClick(Track track) {
+                Toast.makeText(getActivity(), "the track "
+                        + track.getTrackName() + " got clicked", Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onTrackLogoClick(Track track) {
+                Toast.makeText(getActivity(), "The track logo got clicked", Toast.LENGTH_LONG).show();
+            }
+        });
         mTracksRv.setAdapter(tracksRvAdapter);
     }
 }
