@@ -1,5 +1,7 @@
 package com.example.tns.musicapp.playlists;
 
+import com.example.tns.musicapp.R;
+
 import java.util.ArrayList;
 
 public class PlaylistsPresenterImp implements PlaylistsPresenter, PlaylistsInteractor.OnPlaylistsFinishListener {
@@ -14,7 +16,8 @@ public class PlaylistsPresenterImp implements PlaylistsPresenter, PlaylistsInter
 
     @Override
     public void getPlaylists() {
-       playlistsInteractor.getPlaylists(this);
+
+        playlistsInteractor.getPlaylists(this);
     }
 
     @Override
@@ -25,7 +28,23 @@ public class PlaylistsPresenterImp implements PlaylistsPresenter, PlaylistsInter
 
     @Override
     public void onSuccess(ArrayList<Playlist> playlists) {
-        playlistsView.showPlaylists(playlists);
+        ArrayList<PlaylistUI> playlistsUI = new ArrayList<>();
+        for (Playlist playlist : playlists) {
+            PlaylistUI playlistUI = new PlaylistUI(
+                    playlist.getPlaylistId(),
+                    playlist.getName(),
+                    playlist.getItemCount()
+            );
+
+            if (playlistUI.getItemCount() > 10)
+                playlistUI.setColorId(R.color.red);
+            else
+                playlistUI.setColorId(R.color.blue);
+            playlistsUI.add(playlistUI);
+        }
+
+        playlistsView.showPlaylists(playlistsUI);
+
     }
 
     @Override

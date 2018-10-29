@@ -17,6 +17,9 @@ import com.example.tns.musicapp.R;
 
 import java.util.ArrayList;
 
+import butterknife.OnClick;
+import timber.log.Timber;
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -80,18 +83,24 @@ public class PlaylistsFragment extends Fragment implements PlaylistView {
 //    }
 
 //with onClickListener
-    @Override
-    public void showPlaylists(ArrayList<Playlist> playlists) {
-        PlaylistsRvAdapter playlistsRvAdapter = new PlaylistsRvAdapter(playlists, new OnPlaylistClickListener() {
-            @Override
-            public void onPlaylistClicked(Playlist playlist) {
-                Log.d("CS_TAG", "the playlist "
-                        + playlist.getName() + " got clicked");
+@Override
+public void showPlaylists(ArrayList<PlaylistUI> playlists) {
+    PlaylistsRvAdapter playlistsRvAdapter = new PlaylistsRvAdapter(playlists, new OnPlaylistClickListener() {
+        @Override
+        public void onPlaylistClicked(PlaylistUI playlist) {
+            Timber.d("the playlist "
+                    + playlist.getName() + " got clicked");
 
-                Toast.makeText(getActivity(), "the playlist "
-                        + playlist.getName() + " got clicked", Toast.LENGTH_LONG).show();
-            }
-        });
-        playlistsRv.setAdapter(playlistsRvAdapter);
+            Toast.makeText(getActivity(), "the playlist "
+                    + playlist.getName() + " got clicked", Toast.LENGTH_LONG).show();
+        }
+    }, getActivity());
+    playlistsRv.setAdapter(playlistsRvAdapter);
+}
+
+    @OnClick(R.id.filter_button)
+    public void filterPlaylists(View view) {
+        String filterText = mFilterEditText.getText().toString();
+        playlistPresenter.getFilteredPlaylists(filterText);
     }
 }

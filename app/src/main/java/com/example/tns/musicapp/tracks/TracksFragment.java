@@ -60,7 +60,7 @@ public class TracksFragment extends Fragment implements TracksView {
             }
         });
 
-        tracksPresenter = new TracksPresenterImp(this);
+        tracksPresenter = new TracksPresenterImp(this);///
         tracksPresenter.getTracks();
         return v;
     }
