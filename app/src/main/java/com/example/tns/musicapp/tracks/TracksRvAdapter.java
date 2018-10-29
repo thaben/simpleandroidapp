@@ -1,5 +1,6 @@
 package com.example.tns.musicapp.tracks;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,17 +16,19 @@ import java.util.ArrayList;
 
 public class TracksRvAdapter extends RecyclerView.Adapter<TracksRvAdapter.TracksViewHolder> {
 
-    private ArrayList<Track> tracks;
+    private ArrayList<TrackUI> tracks;
     private OnTrackClickListener listener;
+    private Context context;//trackUI
 
-    public TracksRvAdapter(ArrayList<Track> tracks) {
+    public TracksRvAdapter(ArrayList<TrackUI> tracks) {
         this.tracks = tracks;
     }
 
     //onClickListener
-    public TracksRvAdapter(ArrayList<Track> tracks,OnTrackClickListener listener) {
+    public TracksRvAdapter(ArrayList<TrackUI> tracks,OnTrackClickListener listener,Context context) {
         this.tracks = tracks;
         this.listener = listener;
+        this.context = context;
     }
 
     //inner class to save memory for less memory usage-references

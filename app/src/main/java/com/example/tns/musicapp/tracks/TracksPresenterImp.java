@@ -25,7 +25,7 @@ public class TracksPresenterImp implements TracksPresenter,TracksInteractor.OnTr
 
 
     @Override
-    public void onSuccess(ArrayList<Track> tracks) {
+    public void onSuccess(ArrayList<TrackUI> tracks) {
         tracksView.showTracks(tracks);
 
     }

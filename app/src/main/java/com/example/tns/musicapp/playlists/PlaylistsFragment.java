@@ -17,6 +17,8 @@ import com.example.tns.musicapp.R;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 import timber.log.Timber;
 
@@ -25,11 +27,14 @@ import timber.log.Timber;
  */
 public class PlaylistsFragment extends Fragment implements PlaylistView {
 
-
+    @BindView(R.id.playslists_rv)
     RecyclerView playlistsRv;
+
     PlaylistsPresenter playlistPresenter;
 
+    @BindView(R.id.filter_edit_text)
     EditText mFilterEditText;
+
     Button mFilterButton;
 
     public PlaylistsFragment() {
@@ -41,6 +46,7 @@ public class PlaylistsFragment extends Fragment implements PlaylistView {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_playlists, container, false);
+        ButterKnife.bind(this, v);
 
         playlistsRv = v.findViewById(R.id.playslists_rv);
 
@@ -52,16 +58,16 @@ public class PlaylistsFragment extends Fragment implements PlaylistView {
 
         playlistPresenter = new PlaylistsPresenterImp(this);
 
-        //filter
-        mFilterEditText = v.findViewById(R.id.filter_edit_text);
-        mFilterButton = v.findViewById(R.id.filter_button);
-        mFilterButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String filterText = mFilterEditText.getText().toString();
-                playlistPresenter.getFilteredPlaylists(filterText);
-            }
-        });
+        //filter-butterknifed
+//        mFilterEditText = v.findViewById(R.id.filter_edit_text);
+//        mFilterButton = v.findViewById(R.id.filter_button);
+//        mFilterButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                String filterText = mFilterEditText.getText().toString();
+//                playlistPresenter.getFilteredPlaylists(filterText);
+//            }
+//        });
 
         //end of filter
 

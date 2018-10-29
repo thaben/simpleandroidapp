@@ -4,6 +4,6 @@ import java.util.ArrayList;
 
 public interface TracksView {
 
-    void showTracks(ArrayList<Track> tracks);
+    void showTracks(ArrayList<TrackUI> tracks);
 
 }

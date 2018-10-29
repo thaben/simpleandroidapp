@@ -74,20 +74,21 @@ public class TracksFragment extends Fragment implements TracksView {
 //    }
 
 //WITH CLICK LISTENERS
+
     @Override
-    public void showTracks(ArrayList<Track> tracks) {
+    public void showTracks(ArrayList<TrackUI> tracks) {
         TracksRvAdapter tracksRvAdapter = new TracksRvAdapter(tracks, new OnTrackClickListener() {
             @Override
-            public void onTrackClick(Track track) {
+            public void onTrackClick(TrackUI track) {
                 Toast.makeText(getActivity(), "the track "
                         + track.getTrackName() + " got clicked", Toast.LENGTH_LONG).show();
             }
 
             @Override
-            public void onTrackLogoClick(Track track) {
+            public void onTrackLogoClick(TrackUI track) {
                 Toast.makeText(getActivity(), "The track logo got clicked", Toast.LENGTH_LONG).show();
             }
-        });
+        }, getActivity());
         mTracksRv.setAdapter(tracksRvAdapter);
     }
 }

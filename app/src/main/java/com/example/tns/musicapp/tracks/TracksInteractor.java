@@ -9,7 +9,7 @@ public interface TracksInteractor {
 
     //sub interface for callback
     interface OnTracksFinishListener {
-        void onSuccess(ArrayList<Track> tracks);
+        void onSuccess(ArrayList<TrackUI> tracks);
         void onError();
     }
 }

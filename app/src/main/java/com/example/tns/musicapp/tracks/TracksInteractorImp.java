@@ -1,6 +1,5 @@
 package com.example.tns.musicapp.tracks;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class TracksInteractorImp implements TracksInteractor {
@@ -13,10 +12,10 @@ public class TracksInteractorImp implements TracksInteractor {
 
     @Override
     public void getFilteredTracks(OnTracksFinishListener listener, String filter) {
-        ArrayList<Track> filteredTracks = new ArrayList<>();
-        ArrayList<Track> tracks = addMockTracks();
+        ArrayList<TrackUI> filteredTracks = new ArrayList<>();
+        ArrayList<TrackUI> tracks = addMockTracks();
 
-        for(Track t:tracks){
+        for(TrackUI t:tracks){
             if(t.getTrackName().startsWith(filter)){
                 filteredTracks.add(t);
             }
@@ -25,10 +24,10 @@ public class TracksInteractorImp implements TracksInteractor {
     }
 
 
-    private ArrayList<Track> addMockTracks() {
-        ArrayList<Track> tracks = new ArrayList<>();
+    private ArrayList<TrackUI> addMockTracks() {
+        ArrayList<TrackUI> tracks = new ArrayList<>();
         for (int i = 1; i < 100; i++) {
-            Track track = new Track("Track Name " + i, "Track Artist " + i, "TheCategory " + i);
+            TrackUI track = new TrackUI("Track Name " + i, "Track Artist " + i, "TheCategory " + i);
             tracks.add(track);
         }
         return tracks;
