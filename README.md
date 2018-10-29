@@ -5,4 +5,4 @@ This app is developed to demonstrate my first try to apply Clean architecture te
 
 First the app is developed with MVC pattern , and then converted to MVP .
 Proper use of OnClickListeners on fragments and callback methods for the MVP design pattern.
-Use of state of the art libraries for cleaner code( ButterKnife )
+Use of state of the art libraries fo( ButterKnife,Retrofit,Picasso )
